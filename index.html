@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Takshit • Game Creator & Visionary</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Poppins", "Segoe UI", system-ui, sans-serif;
+      --bg: #050510;
+      --surface: rgba(14, 17, 36, 0.8);
+      --accent: #7b5bff;
+      --accent-2: #45f6ff;
+      --text: #f4f6fb;
+      --muted: #a7b5d4;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      margin-left: 1.25rem;
+    }
+    li {
+      margin-bottom: 0.35rem;
+    }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 15% 20%, #140c37, transparent 45%),
+        radial-gradient(circle at 75% 0%, #00395f, transparent 35%),
+        radial-gradient(circle at 80% 70%, #2a0947, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      padding: 1rem clamp(1.5rem, 3vw, 4rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 16, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 50;
+    }
+    header nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.25rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    header nav a:hover {
+      color: var(--accent-2);
+    }
+    main {
+      padding: clamp(2rem, 4vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+    section {
+      background: var(--surface);
+      padding: clamp(1.5rem, 3vw, 3.5rem);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 20px 50px rgba(5, 5, 16, 0.6);
+    }
+    .hero {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+      background: linear-gradient(135deg, rgba(73, 46, 193, 0.65), rgba(21, 155, 177, 0.5));
+      border: none;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.3rem);
+      line-height: 1.1;
+    }
+    .hero p {
+      color: rgba(255, 255, 255, 0.9);
+      margin: 1rem 0 2rem;
+    }
+    .hero img {
+      width: 100%;
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      object-fit: cover;
+      min-height: 280px;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .chip {
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(5, 5, 16, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.9rem;
+    }
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 1.2rem;
+    }
+    .split {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .timeline {
+      border-left: 2px solid rgba(255, 255, 255, 0.15);
+      padding-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.7rem;
+      top: 0.3rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-2);
+      background: #060912;
+    }
+    .highlight-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .highlight {
+      padding: 1.25rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .highlight span {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .gallery figure {
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gallery figure img {
+      width: 100%;
+      display: block;
+      height: 180px;
+      object-fit: cover;
+      filter: saturate(1.2);
+      transition: transform 0.5s;
+    }
+    .gallery figure figcaption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(180deg, transparent, rgba(5, 5, 15, 0.85));
+      font-weight: 600;
+    }
+    .gallery figure:hover img {
+      transform: scale(1.08);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .contact-card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .contact-card strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      header nav a {
+        margin: 0 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>TAKSHIT</strong>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Highlights</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div>
+        <p class="chip">1st Year CSE • Panimalar Engineering College • Chennai</p>
+        <p class="chip">Game Builder • Open World Visionary • Runner Architect</p>
+        <h1>Takshit<br />Interactive Experiences Architect & Learner</h1>
+        <p>
+          Crafting bold, high-energy worlds while mastering the entire CSE stack—from fundamentals to cybersecurity,
+          DSA, and AI/ML. Every build documents my growth as a creator and as a Panimalar engineer ready to learn it all.
+        </p>
+        <div class="chip-row">
+          <span class="chip">Game Design</span>
+          <span class="chip">Front-end Dev</span>
+          <span class="chip">Live Ops</span>
+          <span class="chip">Player Insights</span>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=800&q=80" alt="Takshit concept art" />
+    </section>
+
+    <section id="roadmap">
+      <h2 class="section-heading">Academic Journey & Learning Roadmap</h2>
+      <p>
+        As a first-year CSE student eager to cover “all of it”—core CS, cybersecurity, data structures & algorithms, and AI/ML—this roadmap keeps me accountable.
+      </p>
+      <div class="split">
+        <div class="card">
+          <h3>Semester 1–2 Foundations</h3>
+          <ul>
+            <li>Deepen C/Python programming, discrete math, and digital logic.</li>
+            <li>Document learnings weekly; convert lab work into mini demos.</li>
+            <li>Set up GitHub + Notion knowledge base for every subject.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>DSA & Problem Solving</h3>
+          <ul>
+            <li>Master arrays → linked lists → stacks/queues → trees → graphs → DP.</li>
+            <li>Daily LeetCode/GeeksforGeeks streaks with reflection notes.</li>
+            <li>Host reusable templates and visualizers on my site.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cybersecurity Track</h3>
+          <ul>
+            <li>Linux + networking labs, scripting, OWASP Top 10 basics.</li>
+            <li>Hands-on rooms on TryHackMe, picoCTF, OverTheWire.</li>
+            <li>Share capture-the-flag write-ups to reinforce concepts.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>AI / ML Ramp-Up</h3>
+          <ul>
+            <li>Revisit calculus, probability, and linear algebra essentials.</li>
+            <li>Build NumPy/pandas notebooks, then train classic models in scikit-learn.</li>
+            <li>Pursue mini projects (chatbot, recommender, vision notebook).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Weekly Rhythm</h3>
+          <ul>
+            <li>3 days fundamentals & DSA, 1 day cybersecurity, 1 day AI/ML.</li>
+            <li>Weekends for projects, hackathons, or community events.</li>
+            <li>Log progress publicly to attract mentors and collaborators.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-heading">Skill Constellation</h2>
+      <div class="split">
+        <div class="card">
+          <h3>Design DNA</h3>
+          <p>Systems balancing, retention loops, cinematic pacing, combat sandboxing, F2P economy design.</p>
+        </div>
+        <div class="card">
+          <h3>Tech Arsenal</h3>
+          <p>HTML • CSS • Canvas • JavaScript • Unity • Unreal Engine • Version control • Telemetry pipelines.</p>
+        </div>
+        <div class="card">
+          <h3>Ops & Leadership</h3>
+          <p>Roadmapping, pitch decks, cross-discipline alignment, player research, data-informed iteration.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-heading">Signature Highlights</h2>
+      <div class="highlight-grid">
+        <div class="highlight">
+          <span>TAKSHIT BR</span>
+          <p>Comprehensive battle royale GDD blending Free Fire agility with PUBG depth—full map, systems, and live ops plan.</p>
+        </div>
+        <div class="highlight">
+          <span>SUBWAY RUSH</span>
+          <p>Canvas-powered endless runner featuring lane switching, jumps, slides, procedural obstacles, and neon UI.</p>
+        </div>
+        <div class="highlight">
+          <span>IMMERSIVE HUDs</span>
+          <p>Diegetic interface concepts for sci-fi combat sims—minimal friction, maximum clarity under pressure.</p>
+        </div>
+        <div class="highlight">
+          <span>LIVE EVENTS</span>
+          <p>Event cadences inspired by esports playbooks: limited-time modes, seasonal arcs, and fandom-ready drops.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-heading">Momentum Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>2025 • TAKSHIT Subway Rush</h3>
+          <p>Launched a responsive endless-runner prototype with adaptive difficulty and collectible-driven rewards.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>2024 • TAKSHIT Battle Royale</h3>
+          <p>Designed full-stack blueprint for 50-player open-world PvP, including monetization safeguards and live service tools.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>2023 • Creative Tech Lead</h3>
+          <p>Guided a team of artists, engineers, and data analysts to deliver high-impact prototypes on lightning timelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-heading">Visual Notebook</h2>
+      <div class="gallery">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=800&q=80" alt="Neon city" />
+          <figcaption>Neon Transit City</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Collaboration" />
+          <figcaption>Squad Collaboration</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Concept art" />
+          <figcaption>Archipelago Concept</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Development" />
+          <figcaption>Live Ops Desk</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-heading">Signal Takshit</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <strong>Email</strong>
+          takshitvs@gmail.com
+        </div>
+        <div class="contact-card">
+          <strong>Discord</strong>
+          TAKSHIT#2099
+        </div>
+        <div class="contact-card">
+          <strong>Campus</strong>
+          Panimalar Engineering College • CSE Dept • 1st Year Cohort
+        </div>
+        <div class="contact-card">
+          <strong>Preferred Missions</strong>
+          Prototype spikes • Combat sandboxes • Live event arcs • Creative direction.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Takshit. Built with grit, neon, and endless imagination.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
